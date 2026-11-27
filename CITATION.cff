@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "Cite this version of the research release."
+type: software
+title: "A sharp beta-density inequality for PAC mode estimation"
+authors:
+  - name: "DannyExperiments"
+version: "1.0.0"
+date-released: 2026-11-27
+doi: "10.5281/zenodo.24572899"
+url: "https://doi.org/10.5281/zenodo.24572899"
+repository-code: "https://github.com/DannyExperiments/sharp-beta-density-crossing"
+keywords:
+  - "beta distribution"
+  - "mode estimation"
+  - "prior-posterior ratio"
+  - "confidence sequences"
+  - "sequential stopping"
+  - "crossing inequality"
+  - "binomial coefficients"
+  - "PAC learning"
+preferred-citation:
+  type: software
+  title: "A sharp beta-density inequality for PAC mode estimation"
+  authors:
+    - name: "DannyExperiments"
+  version: "1.0.0"
+  date-released: 2026-11-27
+  doi: "10.5281/zenodo.24572899"
+  url: "https://doi.org/10.5281/zenodo.24572899"
+  repository-code: "https://github.com/DannyExperiments/sharp-beta-density-crossing"

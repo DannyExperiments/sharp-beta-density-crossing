@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Explore two beta densities at their crossing</title>
+<style>
+:root{color-scheme:dark;--bg:#101b32;--panel:#162640;--edge:#415c80;--text:#f7faff;--muted:#c2cee1;--mint:#6aead7;--amber:#ffd086;--blue:#a9bdfb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 system-ui,sans-serif}
+main{max-width:660px;margin:auto;padding:22px 16px 32px}
+h1{font-size:clamp(1.65rem,5.2vw,2.5rem);line-height:1.12;margin:0}
+header p,details{color:var(--muted)}header p{margin:.45rem 0 1rem}
+.controls{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 .75rem;align-items:center}
+button{min-width:48px;min-height:46px;padding:7px 10px;border:1px solid var(--edge);border-radius:9px;background:#233958;color:var(--text);font:inherit;font-weight:660;cursor:pointer}
+input{accent-color:var(--mint);min-height:44px;flex:1;min-width:114px}
+button:focus-visible,input:focus-visible,#chart:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.diagram,.numbers{background:var(--panel);border:1px solid var(--edge);border-radius:14px;overflow:hidden}
+#chart{display:block;width:100%;height:auto;touch-action:pan-y;cursor:grab}
+#chart:active{cursor:grabbing}#chart:focus-visible{outline-offset:-5px}
+text{text-anchor:middle;font-family:system-ui,sans-serif;fill:var(--text);font-size:18px}
+.legend{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1rem;padding:0 .5rem .65rem;font-size:.89rem}
+.amber{color:var(--amber)}.blue{color:var(--blue)}.mint{color:var(--mint)}
+.numbers{margin-top:.65rem;padding:.65rem .75rem}.numbers p{margin:.18rem 0}#height{font-size:1.15rem;font-weight:720}
+details{margin-top:1rem}summary{cursor:pointer;color:var(--text);font-weight:700}
+label{color:var(--muted)}
+</style>
+</head>
+<body>
+<main>
+<header>
+<h1>Explore two beta densities at their crossing</h1>
+<p>Keep the leader’s count at 2 and the competitor’s at 0. Other observations change both full-count densities; the binary baseline stays at 3/4.</p>
+</header>
+<label for="others">Other observations <output id="total">0</output></label>
+<div class="controls">
+<button id="minus" aria-label="Remove one other observation">−1</button>
+<input type="range" id="others" min="0" max="12" value="0" step="1">
+<button id="plus" aria-label="Add one other observation">+1</button>
+<button id="reset">Reset</button>
+</div>
+<div class="diagram">
+<svg id="chart" viewBox="0 0 460 270" tabindex="0" role="img" aria-labelledby="plotTitle plotDesc">
+<title id="plotTitle">Two beta densities and their lower envelope</title>
+<desc id="plotDesc">The curves show posterior densities, and their lower envelope is highlighted in mint. Their intersection gives the maximum of the smaller density. The dotted line marks the binary baseline.</desc>
+<g id="draw"></g>
+</svg>
+<div class="legend"><span class="amber">Count 2</span><span class="blue">Count 0</span><span class="mint">Smaller density</span><span>Dotted baseline</span></div>
+</div>
+<div class="numbers" aria-live="polite" aria-atomic="true">
+<p id="cross"></p>
+<p id="height" class="mint"></p>
+<p id="trial"></p>
+<p id="factor"></p>
+</div>
+<details>
+<summary>Why the crossing is enough</summary>
+<p>To its left the smaller curve is increasing; to its right the smaller curve is decreasing. So the crossing maximizes the smaller density. The proof evaluates both curves at a common trial point, which is 3/[2(t+1)] for full count t in this example, and shows both are above the binary baseline when other observations are present.</p>
+<p>Drag to rotate the graph or use the arrow keys while it has focus. Decimal figures are rounded for display.</p>
+</details>
+</main>
+<script>
+"use strict";
+const byId=id=>document.getElementById(id);
+const chart=byId("chart"), layer=byId("draw"), slider=byId("others");
+let phase=.20,drag=null;
+const coords=points=>points.map(p=>p.join(",")).join(" ");
+const line=(a,b,hue,dash="")=>'<line x1="'+a[0]+'" y1="'+a[1]+'" x2="'+b[0]+'" y2="'+b[1]+'" stroke="'+hue+'" '+dash+'/>';
+const curve=(points,color,width)=>'<polyline points="'+coords(points)+'" fill="none" stroke="'+color+'" stroke-width="'+width+'" stroke-linecap="round"/>';
+function render(){
+  const f=Number(slider.value),t=2+f,ym=t+1,choose=t*(t-1)/2;
+  const odds=1/Math.sqrt(choose),theta=odds/(1+odds),trial=3/(2*(t+1));
+  const lead=p=>ym*choose*p*p*(1-p)**(t-2);
+  const runner=p=>ym*(1-p)**t;
+  const h=runner(theta),factor=(t+1)**2/(3*(2*t-1));
+  byId("total").textContent=f;
+  byId("cross").textContent="Crossing p = "+(f===0?"1/2":f===7?"1/7":theta.toFixed(5))+".";
+  byId("height").textContent="Height "+h.toFixed(4)+" vs baseline 0.7500";
+  byId("trial").textContent="At the common trial p = "+trial.toFixed(5)+", the smaller density is "+Math.min(lead(trial),runner(trial)).toFixed(4)+".";
+  byId("factor").textContent="Proved lower factor "+factor.toFixed(4)+".";
+  const yaw=.43*Math.sin(phase);
+  const pxy=(p,y,z=0)=>[230+338*((p-.5)*Math.cos(yaw)+z*Math.sin(yaw)),218-170*y/ym-40*(p-.5)*Math.sin(yaw)-28*z];
+  const panel=z=>[pxy(0,0,z),pxy(1,0,z),pxy(1,ym,z),pxy(0,ym,z)];
+  let svg='<polygon points="'+coords(panel(.13))+'" fill="#213a5c" stroke="#466080"/>';
+  svg+='<polygon points="'+coords(panel(0))+'" fill="#192b47" stroke="#466080"/>';
+  for(const y of [0,ym/2,ym])svg+=line(pxy(0,y),pxy(1,y),"#385171");
+  svg+=line(pxy(0,.75),pxy(1,.75),"#d3deef",'stroke-dasharray="4 5"');
+  const ps=Array.from({length:101},(_,i)=>i/100);
+  svg+=curve(ps.map(p=>pxy(p,lead(p))),"#ffd086",2.5);
+  svg+=curve(ps.map(p=>pxy(p,runner(p))),"#a9bdfb",2.5);
+  svg+=curve([...ps,theta].sort((a,b)=>a-b).map(p=>pxy(p,Math.min(lead(p),runner(p)))),"#6aead7",4);
+  const [cx,cy]=pxy(theta,h);
+  svg+='<circle cx="'+cx+'" cy="'+cy+'" r="6" fill="#6aead7" stroke="#101b32" stroke-width="2"/>';
+  const [ax,ay]=pxy(0,0),[bx,by]=pxy(1,0),[mx,my]=pxy(0,ym);
+  svg+='<text x="'+ax+'" y="'+(ay+19)+'">0</text><text x="'+bx+'" y="'+(by+19)+'">1</text>';
+  svg+='<text x="'+(mx-18)+'" y="'+(my+5)+'">'+ym+'</text>';
+  svg+='<text x="230" y="256">Probability p</text>';
+  layer.innerHTML=svg;
+}
+function increment(delta){slider.value=Number(slider.value)+delta;render();}
+slider.addEventListener("input",render);
+byId("minus").addEventListener("click",()=>increment(-1));
+byId("plus").addEventListener("click",()=>increment(1));
+byId("reset").addEventListener("click",()=>{slider.value=0;phase=.20;render();});
+chart.addEventListener("pointerdown",e=>{drag=e.clientX;chart.setPointerCapture(e.pointerId);});
+chart.addEventListener("pointermove",e=>{if(drag!==null){phase+=(e.clientX-drag)/85;drag=e.clientX;render();}});
+chart.addEventListener("lostpointercapture",()=>{drag=null;});
+chart.addEventListener("keydown",e=>{
+  if(e.key!=="ArrowLeft"&&e.key!=="ArrowRight")return;
+  e.preventDefault();phase+=e.key==="ArrowLeft"?-.12:.12;render();
+});
+render();
+</script>
+</body>
+</html>

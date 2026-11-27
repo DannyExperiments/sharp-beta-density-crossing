@@ -1,0 +1,32 @@
+{
+  "title": "A sharp beta-density inequality for PAC mode estimation",
+  "upload_type": "software",
+  "publication_date": "2026-11-27",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "DannyExperiments"
+    }
+  ],
+  "keywords": [
+    "beta distribution",
+    "mode estimation",
+    "prior-posterior ratio",
+    "confidence sequences",
+    "sequential stopping",
+    "crossing inequality",
+    "binomial coefficients",
+    "PAC learning"
+  ],
+  "description": "<p>This note proves the beta-density inequality conjectured by Anand Jain et al. in Appendix C.2 of PAC Mode Estimation using PPR Martingale Confidence Sequences (AISTATS 2022). At the unique interior crossing of the full-count beta densities for counts a&gt;b≥0 with f other observations, the common height is at least the binary 1/2 baseline. This replaces the conjectured factor (K−1)/K by the sharp factor 1, with equality precisely when f=0. A quantitative factor depending on the count of other observations is also proved.</p><p>Evaluate both densities at the same moving trial point (a+b+1)/[2(t+1)], while holding a and b fixed. A real interpolation of the total and a right-endpoint integral bound give a nonnegative logarithmic derivative. Integration bounds both trial densities below by the binary baseline times an explicit factor. The crossing sits between the density modes and maximizes their lower envelope, so the trial bound applies there. This varies the total without changing either observed count, unlike earlier and later monotonicities at 1/2 that change the counts.</p><p>For the published uniform-prior PPR rules, separation by the 1vr confidence intervals implies crossing height at most δ/K. The binary baseline is no larger, so it satisfies the 1v1 threshold δ/(K−1). Thus on a common sample path the published PPR-1v1 rule stops no later than PPR-1vr. The statement concerns the original priors and thresholds.</p><p>The release includes a paper, TeX, bibliography, citation metadata, evidence archive, and repository checksum ledger. Its exact standard-library replay checks 12,903 trial and bracket cases and 212 rational crossings, with 51 grid points per crossing. The rotating plot and offline explorer show the worked counts 2 and 0. External peer review and formal verification are pending.</p><p>ChatGPT Astra 6.2 (OpenAI) generated the recovered proof and original replay under human direction. OpenAI Codex independently reviewed the mathematics. GPT-6.2 Sol (OpenAI) checked primary sources and prepared the manuscript, extended replay and illustration. DannyExperiments is the project citation identity.</p>",
+  "access_right": "open",
+  "license": "other-closed",
+  "notes": "All rights reserved. Publicly downloadable files are supplied without a repository-wide reuse license.",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/DannyExperiments/sharp-beta-density-crossing/releases/tag/v1.0.0",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[hmargin=.83in,vmargin=.72in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{amssymb}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={A sharp beta-density inequality for PAC mode estimation}}
+\urlstyle{same}
+\setlength{\emergencystretch}{2em}
+\linespread{0.95}
+\DeclareMathSizes{8}{8}{8}{8}
+\DeclareMathSizes{9}{9}{8}{8}
+\DeclareMathSizes{10.95}{10.95}{8}{8}
+\renewcommand{\bibliofont}{\normalsize\raggedright}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\title[A sharp beta-density inequality]{A sharp beta-density inequality for PAC mode estimation}
+\date{}
+\begin{document}
+\begin{abstract}
+Anand Jain et al.\ conjectured a lower bound for the common height where two beta densities cross. The bound would imply that the PPR-1v1 stopping rule never stops later than PPR-1vr on the same sample path. We prove the density comparison with sharp factor one, replacing the conjectured factor $(K-1)/K$, and include a zero runner-up count. The proof moves a common trial parameter while holding both counts fixed. A logarithmic derivative gives a quantitative improvement when there are other observations.
+\end{abstract}
+\maketitle
+
+\section{The crossing and its binary baseline}
+For integers $t\ge0$ and $0\le k\le t$, let
+\[
+ L_{t,k}(p)=\frac{p^k(1-p)^{t-k}}{\mathrm{B}(k+1,t-k+1)}
+          =(t+1)\binom{t}{k}p^k(1-p)^{t-k}.
+\]
+At endpoints the formula is interpreted by continuity. Fix integers $a>b\ge0$ and $f\ge0$, and put $c=a+b$ and $t=c+f$. The leader and competitor have counts $a,b$; $f$ is the remaining count. Their unique interior crossing is
+\[
+ r=\left(\frac{a!(t-a)!}{b!(t-b)!}\right)^{1/(a-b)},
+ \qquad \theta=\frac{r}{1+r}.
+\]
+The formula follows from the density ratio on $(0,1)$. The common height will be written $H=L_{t,a}(\theta)=L_{t,b}(\theta)$. At $f=0$ the crossing is $1/2$, with common height $H_0=L_{c,a}(1/2)=L_{c,b}(1/2)$.
+
+Appendix~C.2 of Anand Jain et al.\ \cite[PDF p.~19]{aj} conjectures $H\ge (K-1)H_0/K$ for the mode-estimation comparison with $K$ categories. The proposed bound was checked numerically on positive counts. The following bound supplies the required implication with a sharp constant and covers $b=0$.
+
+\begin{theorem}\label{thm:bound}
+For all the above counts,
+\[
+     H\ \ge\ \frac{(c+f+1)^2}{(c+1)(c+2f+1)}\,H_0\ \ge\ H_0,
+ \qquad H_0=\frac{1}{2^c\,\mathrm{B}(a+1,b+1)}.
+\]
+Equality in $H\ge H_0$ holds exactly when $f=0$.
+\end{theorem}
+
+\section{A moving trial point}
+Put $x=t+1$ and $m=(c+1)/2$. The trial point is $p=m/x$. For an integer $k\in[0,c]$ define a positive real interpolation for all $x\ge c+1$ by
+\[
+ F_k(x)=\frac{\prod_{j=0}^k(x-j)}{k!}
+          \left(\frac{m}{x}\right)^k
+          \left(1-\frac{m}{x}\right)^{x-1-k}.
+\]
+For integer $x$ it equals $L_{x-1,k}(m/x)$. A logarithmic derivative gives
+\[
+ \frac{\mathrm d}{\mathrm dx}\log F_k(x)
+ =\sum_{j=0}^{k}\frac1{x-j}-\frac{k}{x}
+   +\log(1-m/x)
+   +\frac{(x-1-k)m}{x(x-m)}.
+\]
+The summands for $j=1,\ldots,k$ are right endpoint values of the increasing function $s\mapsto 1/(x-s)$. Hence the sum is at least $1/x-\log(1-k/x)$, including $k=0$. Write $\alpha=k/x$, $\beta=m/x$ and $z=(1-\alpha)/(1-\beta)$. Regrouping the derivative bound yields
+\[
+ \frac{\mathrm d}{\mathrm dx}\log F_k(x)
+ \ \ge\ z-1-\log z+\frac{1-2\beta}{x(1-\beta)}
+ \ \ge\ \frac{x-2m}{x(x-m)}.
+\]
+Here $\log z\le z-1$ for $z>0$. Integrating the last expression from $2m$ to $x$ gives
+\[
+ F_k(x)\ \ge\ F_k(2m)\frac{x^2}{4m(x-m)}.
+\]
+For $k=a,b$, both initial values equal $H_0$ by binomial symmetry. The factor is one at $x=2m$ and larger for $x>2m$, since $x^2-4m(x-m)=(x-2m)^2$.
+
+\section{From the trial to the crossing}
+The crossing odds are the geometric mean
+\[
+ r=\left(\prod_{j=b+1}^{a}\frac{j}{t-j+1}\right)^{1/(a-b)}.
+\]
+The factors increase in $j$. Bounding their geometric mean by the first and last factor gives $b/t\le \theta\le a/t$. For $p\in(0,1)$ the ratio $L_{t,a}(p)/L_{t,b}(p)$ increases strictly and equals one at $\theta$. On the left of $\theta$, the smaller density is $L_{t,a}$, which increases up to its mode $a/t$. On the right it is $L_{t,b}$, which decreases from its mode $b/t$. These monotonicities extend to boundary modes $0$ and $1$ by continuity. Therefore the crossing maximizes the smaller density on all of $[0,1]$. In particular
+\[
+       H\ \ge\ \min\bigl\{F_a(t+1),F_b(t+1)\bigr\}.
+\]
+The integrated bound gives Theorem~\ref{thm:bound}. At $f=0$, $r=1$ and both densities meet the binary baseline, so the universal factor one is sharp.
+
+For instance, with $a=2$, $b=0$, $f=7$, the crossing is $1/7$ and its height is $10(6/7)^9$. The common trial is $3/20$. With the same $a,b$ and $f=0$, the two densities meet at $1/2$ with height $3/4$. The illustration shows the lower envelope in these examples.
+
+\section{Pathwise consequence for the original PPR rules}
+\begin{corollary}
+For the original uniform-prior PPR-1v1 and PPR-1vr rules of \cite{aj}, with the same error parameter $0<\delta<1$ and $K\ge2$ categories, PPR-1v1 stops no later than PPR-1vr on each fixed sample path.
+\end{corollary}
+\begin{proof}
+In the 1vr rule the full-count interval for a category with $k$ observations is the superlevel interval of $L_{t,k}$ at threshold $\delta/K$ \cite[Sections~3.2 and C.2]{aj}. Its interior in $(0,1)$ includes every point of strict superlevel density there. Tied leaders cannot be separated, because their intervals coincide and contain a positive-length strict superlevel interval. The latter follows from normalization and $\delta/K<1$.
+
+If the 1vr rule stops, take its empirical leader of count $a$ and any competitor of count $b<a$. Their interval interiors are disjoint, so both densities cannot strictly exceed $\delta/K$ at their crossing. Hence $H\le\delta/K$. The corresponding pair-only 1v1 test uses $H_0$ at $1/2$ and threshold $\delta/(K-1)$. The theorem yields
+\[
+                H_0\le H\le \delta/K < \delta/(K-1).
+\]
+Thus the leader passes all pairwise tests by this time, including against zero-count competitors. The strict comparison also covers 1vr intervals touching at a threshold endpoint.
+\end{proof}
+
+Qiu, Artola Velasco and Gomez-Rodriguez \cite[Appendix~A.1]{qiu} vary the counts while evaluating at $1/2$. Here the total varies with both counts fixed.
+
+\section*{Replay and technical disclosure}
+The standard-library replay uses exact rational arithmetic for the trial bound and crossing-odds brackets on a finite parameter family. It also checks the displayed rational crossing fixture. External peer review and formal verification are pending.
+
+ChatGPT Astra 6.2 (OpenAI) generated the recovered proof and original replay under human direction. OpenAI Codex independently reviewed the mathematics. GPT-6.2 Sol (OpenAI) checked primary sources and prepared the manuscript, extended replay and illustration. DannyExperiments is the project citation identity.
+
+\bibliographystyle{amsplain}
+\bibliography{references}
+\end{document}

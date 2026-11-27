@@ -1,0 +1,3 @@
+12903 exact trial controls, crossing-odds brackets, and equality checks.
+212 exact rational crossings, each checked at 51 grid points.
+Worked fixture: H0=3/4; for a=2, b=0, f=7, theta=1/7 and H=10*(6/7)^9.
