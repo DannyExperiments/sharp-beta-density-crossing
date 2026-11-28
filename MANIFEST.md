@@ -3,6 +3,7 @@
 The files below are verified by the repository SHA-256 ledger.
 
 - `.gitattributes`
+- `.github/workflows/lean.yml`
 - `.github/workflows/pdf.yml`
 - `.github/workflows/replay.yml`
 - `.github/workflows/verify.yml`
@@ -22,6 +23,10 @@ The files below are verified by the repository SHA-256 ledger.
 - `STATUS.md`
 - `audits/public_safe_reports/LITERATURE_AUDIT.md`
 - `audits/public_safe_reports/MATHEMATICAL_AUDIT.md`
+- `formalization/Q950Crossing.lean`
+- `formalization/README.md`
+- `formalization/expected-axioms.txt`
+- `formalization/lean-toolchain`
 - `paper/BUILD.md`
 - `paper/manuscript.pdf`
 - `paper/manuscript.tex`

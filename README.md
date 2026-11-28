@@ -1,6 +1,6 @@
 # A sharp beta-density inequality for PAC mode estimation
 
-[![Repository verification](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/verify.yml) [![Replay verification](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/replay.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/replay.yml) [![PDF build](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/pdf.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/pdf.yml)
+[![Repository verification](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/verify.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/verify.yml) [![Replay verification](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/replay.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/replay.yml) [![PDF build](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/pdf.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/pdf.yml) [![Partial Lean verification](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/lean.yml/badge.svg?branch=main)](https://github.com/DannyExperiments/sharp-beta-density-crossing/actions/workflows/lean.yml)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24572899.svg)](https://doi.org/10.5281/zenodo.24572899)
 
 At the interior crossing of the beta densities for two counts, their common height is at least the corresponding binary density at 1/2. The factor 1 is sharp and strengthens the AISTATS 2022 conjecture. The proof covers a zero runner-up count.
@@ -24,3 +24,7 @@ For the original uniform-prior PPR rules, if PPR-1vr stops on a sample path then
 [Mathematical audit](audits/public_safe_reports/MATHEMATICAL_AUDIT.md) · [Literature audit](audits/public_safe_reports/LITERATURE_AUDIT.md) · [Scope](CLAIM_SCOPE_AND_LIMITATIONS.md) · [AI disclosure](AI_DISCLOSURE.md) · [Status](STATUS.md)
 
 [Release v1.0.0](https://github.com/DannyExperiments/sharp-beta-density-crossing/releases/tag/v1.0.0) · [Version DOI](https://doi.org/10.5281/zenodo.24572899) · [Citation](CITATION.cff)
+
+## Partial Lean verification
+
+For positive rational A and B and every positive integer exponent d, the reduced beta kernels A·pᵈ and B·(1−p)ᵈ have at most one crossing in rational 0<p<1. The proof uses strict power monotonicity on both sides. [Scope, source and replay](formalization/README.md)

@@ -7,3 +7,7 @@
 | Explicit strengthening for positive f | Paper §2. Integrated logarithmic derivative. |
 | Original PPR stopping rule ordering | Paper §4. The two quoted thresholds and interval separation. |
 | Finite evidence | 12,903 trial controls and 212 rational crossing fixtures, each checked at 51 points. |
+
+## Partial Lean verification
+
+For positive rational A and B and every positive integer exponent d, the reduced beta kernels A·pᵈ and B·(1−p)ᵈ have at most one crossing in rational 0<p<1. The proof uses strict power monotonicity on both sides. [Scope, source and replay](formalization/README.md)
